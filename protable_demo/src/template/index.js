@@ -15,16 +15,16 @@ const columns = [
   {
     title: 'Title',
     dataIndex: 'name',
-    renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
-        if (type === 'form') {
-          return null;
-        }
-        // const status = form.getFieldValue('state');
-        // if (status !== 'open') {
-          return <Input {...rest} placeholder="请输入test" />;
-        // }
-        // return defaultRender(_);
+    renderFormItem: (_, { type, defaultRender,formItemProps, fieldProps, ...rest }, form) => {
+      if (type === 'form') {
+        return null;
       }
+      const status = form.getFieldValue('state');
+      if (status !== 'open') {
+        return <Input {...fieldProps} placeholder="请输入test" />;
+      }
+        return defaultRender(_);
+    }
   },
   {
     title: 'Money',
