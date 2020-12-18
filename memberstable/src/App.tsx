@@ -1,11 +1,9 @@
 import React, { FC }from 'react';
-import { Button } from 'antd';
 import './App.less';
+import ProTablePage from './page'
 
 const App: FC = () => (
-  <div className="App">
-    <Button type="primary">Button</Button>
-  </div>
+  <ProTablePage />
 );
 
 export default App;
