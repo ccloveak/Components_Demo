@@ -1,0 +1,9 @@
+module.exports = {
+    "tabWidth": 4,
+    "useTabs": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "printWidth": 100,
+    "endOfLine": "auto",
+    "bracketSpacing": true
+}
