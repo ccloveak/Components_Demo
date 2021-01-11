@@ -1,12 +1,14 @@
 # Components_Demo
-* 组件的使用演示
+* 学习组件的使用方法
 * 使用遇到问题提issue
 
 ## ant design
 1. [table使用](./table_demo)
     * 无log warning
     * 可正常使用
-
+2. [基本开发环境](./base_demo)
+    * 2021.1.11
+    * 一套可复制的开发环境
 ## ant design pro
 1. [protable使用](./protable_demo)
     * 2.9.10 有log warning
@@ -23,6 +25,6 @@
     * 随着技术积累，应该会回过头来看看这部分代码
     * 留着这个的另一个原因是里面的mock数据花了好久整理的
 
-2. [recaptcha整合到项目中](./recaptcha-table_demo)
+2. [recaptcha整合到项目中](./recaptcha_demo)
     * 需要生成[sitekey](https://www.google.com/recaptcha/admin/create)
     * 调用recaptcha控件的reset方法
