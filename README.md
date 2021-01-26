@@ -7,6 +7,8 @@
 
 1. [前端开发环境](./frontend_base_demo)
    - 2021.1.11
+   - 2021.1.27 貌似直接复制后，自动格式化失效？？？有点影响开发心情
+  
 2. [后端开发环境](./backend_base_demo)
 
 ## ant design
@@ -37,3 +39,9 @@
 2. [recaptcha 整合到项目中](./recaptcha_demo)
    - 需要生成[sitekey](https://www.google.com/recaptcha/admin/create)
    - 调用 recaptcha 控件的 reset 方法
+
+3. [react基本拖拽](./react_base_dnd)
+   - 监听React鼠标事件
+   - 判断拖放开始结束
+   - 实现元素位置移动
+   - 维护拖放状态
