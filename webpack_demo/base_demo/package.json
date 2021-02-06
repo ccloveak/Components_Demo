@@ -1,0 +1,19 @@
+{
+  "name": "base_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "prettier": "^2.2.1",
+    "webpack": "^5.21.1",
+    "webpack-cli": "^4.5.0"
+  }
+}
