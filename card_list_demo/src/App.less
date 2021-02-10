@@ -1,0 +1,141 @@
+@import '~antd/es/style/themes/default.less';
+@table-border: #fff;
+.template_SheetList {
+    .textOverflow() {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
+    }
+
+    .textOverflowMulti(@line: 3, @bg: #fff) {
+        position: relative;
+        max-height: @line * 1.5em;
+        margin-right: -1em;
+        padding-right: 1em;
+        overflow: hidden;
+        line-height: 1.5em;
+        text-align: justify;
+        &::before {
+            position: absolute;
+            right: 14px;
+            bottom: 0;
+            padding: 0 1px;
+            background: @bg;
+            content: '...';
+        }
+        &::after {
+            position: absolute;
+            right: 14px;
+            width: 1em;
+            height: 1em;
+            margin-top: 0.2em;
+            background: white;
+            content: '';
+        }
+    }
+
+    .clearfix() {
+        zoom: 1;
+        &::before,
+        &::after {
+            display: table;
+            content: ' ';
+        }
+        &::after {
+            clear: both;
+            height: 0;
+            font-size: 0;
+            visibility: hidden;
+        }
+    }
+
+    .extraContent {
+        font-size: 1.5em;
+    }
+    .ant-card-body {
+        padding: 12px;
+    }
+
+    .ant-card-head-title {
+        font-weight: bold;
+        padding: 0px;
+        color: @primary-color;
+    }
+
+    .sheetButton {
+        color: @primary-color;
+        background-color: @component-background;
+        border-color: @table-border;
+        margin-left: 5px;
+    }
+
+    .sheetAvatar {
+        width: 100px;
+        height: 50px;
+        margin-top: 2vh;
+        display: flex;
+        justify-content: space-around;
+    }
+    .sheetAvatar_data {
+        font-size: 1.5em;
+    }
+    .sheetAvatar_text {
+        margin-top: 1vh;
+    }
+    .sheetDescription {
+        min-height: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .descriptionLine {
+        height: 1.2em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: flex;
+        justify-content: flex-start;
+        .icon {
+            margin-top: -5px;
+            margin-right: 1vw;
+        }
+        .content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1em;
+        }
+    }
+    .response_small {
+        display: none;
+    }
+
+    @media screen and (max-width: @screen-lg) {
+    }
+    @media screen and (max-width: @screen-md) {
+    }
+
+    @media screen and (max-width: @screen-sm) {
+        .extraContent {
+            font-size: 1.2em;
+            margin-top: 2vh;
+        }
+        .sheetButton {
+            margin-left: 1vw;
+        }
+        .descriptionLine {
+            .icon {
+                margin-right: 3vw;
+            }
+        }
+        .response_large {
+            display: none;
+        }
+        .response_small {
+            display: inherit;
+        }
+        .ant-card-meta-avatar {
+            padding-right: 5px;
+        }
+    }
+}

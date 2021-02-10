@@ -1,4 +1,4 @@
-import './App.css';
+import './App.less';
 
 import React, { FC } from 'react';
 import { Button, Card, Form, Input, List } from 'antd';
