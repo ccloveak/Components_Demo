@@ -1,112 +1,131 @@
-import React, { FC, useState } from 'react';
-import { Tree } from 'antd';
-const treeData = [
+import React, { useState, useEffect } from 'react';
+import { Tree, Spin } from 'antd';
+// import { EditOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+// const { Search } = Input;
+// 测试数据
+const { TreeNode } = Tree;
+
+interface DateType {
+    title: string;
+    key: string;
+    children?: [];
+}
+
+const tree_data = [
     {
-        title: '0-0',
-        key: '0-0',
+        title: '個人情報',
+        key: 'SAMPLE_SHEET_CATEGORY_PERSONAL_INFO',
         children: [
             {
-                title: '0-0-0',
-                key: '0-0-0',
-                children: [
-                    {
-                        title: '0-0-0-0',
-                        key: '0-0-0-0',
-                    },
-                    {
-                        title: '0-0-0-1',
-                        key: '0-0-0-1',
-                    },
-                    {
-                        title: '0-0-0-2',
-                        key: '0-0-0-2',
-                    },
-                ],
+                title: '[サンプル]住所・連絡先',
+                key: 'SAMPLE_SHEET_DEFINITION_CONTACT_ADDRESS',
             },
             {
-                title: '0-0-1',
-                key: '0-0-1',
-                children: [
-                    {
-                        title: '0-0-1-0',
-                        key: '0-0-1-0',
-                    },
-                    {
-                        title: '0-0-1-1',
-                        key: '0-0-1-1',
-                    },
-                    {
-                        title: '0-0-1-2',
-                        key: '0-0-1-2',
-                    },
-                ],
-            },
-            {
-                title: '0-0-2',
-                key: '0-0-2',
+                title: '[サンプル]評価履歴',
+                key: 'SAMPLE_SHEET_DEFINITION_ANNUAL_REVIEW',
             },
         ],
     },
     {
-        title: '0-1',
-        key: '0-1',
+        title: '資格情報',
+        key: 'SAMPLE_SHEET_CATEGORY_QUALIFICATIONS',
         children: [
             {
-                title: '0-1-0-0',
-                key: '0-1-0-0',
+                title: '[サンプル]学歴',
+                key: 'SAMPLE_SHEET_DEFINITION_EDUCATION_BACKGROUND',
             },
             {
-                title: '0-1-0-1',
-                key: '0-1-0-1',
-            },
-            {
-                title: '0-1-0-2',
-                key: '0-1-0-2',
+                title: '[サンプル]資格管理',
+                key: 'SAMPLE_SHEET_DEFINITION_CERTIFICATION',
             },
         ],
-    },
-    {
-        title: '0-2',
-        key: '0-2',
     },
 ];
 
-const App: FC = () => {
-    const [expandedKeys, setExpandedKeys] = useState(['0-0-0', '0-0-1']);
-    const [checkedKeys, setCheckedKeys] = useState(['0-0-0']);
-    const [selectedKeys, setSelectedKeys] = useState([]);
-    const [autoExpandParent, setAutoExpandParent] = useState(true);
+const App = () => {
+    const [treeData, setTreeData] = useState(tree_data);
+    function onDrop(info: any) {
+        const dragNode = info.dragNode;
+        const dropNode = info.node;
+        const isSameLevel = (a: any, b: any) => {
+            const aLevel = a.props.pos.split('-').length;
+            const bLevel = b.props.pos.split('-').length;
+            return aLevel === bLevel;
+        };
 
-    const onExpand = (expandedKeysValue: any) => {
-        console.log('onExpand', expandedKeysValue);
-        setExpandedKeys(expandedKeysValue);
-        setAutoExpandParent(false);
-    };
+        const isSameParent = (a: any, b: any) => {
+            const aLevel = a.props.pos.split('-');
+            const bLevel = b.props.pos.split('-');
+            aLevel.pop();
+            bLevel.pop();
+            return aLevel.join('') === bLevel.join('');
+        };
+        const canDrop =
+            isSameParent(dragNode, dropNode) && isSameLevel(dragNode, dropNode) && info.dropToGap;
+        if (!canDrop) {
+            return;
+        }
+        const sameLevel = isSameLevel(dragNode, dropNode);
+        const sameParent = isSameParent(dragNode, dropNode);
+        if (sameParent && sameLevel) {
+            const dropKey = info.node.props.eventKey;
+            const dragKey = info.dragNode.props.eventKey;
+            const dropPos = info.node.props.pos.split('-');
+            const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1]);
 
-    const onCheck = (checkedKeysValue: any) => {
-        console.log('onCheck', checkedKeysValue);
-        setCheckedKeys(checkedKeysValue);
-    };
+            const loop = (data: any, key: string, callback: any) => {
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].key === key) {
+                        return callback(data[i], i, data);
+                    }
+                    if (data[i].children) {
+                        loop(data[i].children, key, callback);
+                    }
+                }
+            };
+            const data = [...treeData];
 
-    const onSelect = (selectedKeysValue: any, info: any) => {
-        console.log('onSelect', info);
-        setSelectedKeys(selectedKeysValue);
-    };
+            // Find dragObject
+            let dragObj: any;
+            loop(data, dragKey, (item: any, index: any, arr: any) => {
+                arr.splice(index, 1);
+                dragObj = item;
+            });
 
-    return (
-        <Tree
-            checkable
-            selectable
-            onExpand={onExpand}
-            expandedKeys={expandedKeys}
-            autoExpandParent={autoExpandParent}
-            onCheck={onCheck}
-            checkedKeys={checkedKeys}
-            onSelect={onSelect}
-            selectedKeys={selectedKeys}
-            treeData={treeData}
-        />
-    );
+            if (!info.dropToGap) {
+                // Drop on the content
+                loop(data, dropKey, (item: any) => {
+                    item.children = item.children || [];
+                    // where to insert 示例添加到尾部，可以是随意位置
+                    item.children.push(dragObj);
+                });
+            } else if (
+                (info.node.props.children || []).length > 0 && // Has children
+                info.node.props.expanded && // Is expanded
+                dropPosition === 1 // On the bottom gap
+            ) {
+                loop(data, dropKey, (item: any) => {
+                    item.children = item.children || [];
+                    // where to insert 示例添加到头部，可以是随意位置
+                    item.children.unshift(dragObj);
+                });
+            } else {
+                let ar: any = [];
+                let i: any;
+                loop(data, dropKey, (item: any, index: any, arr: any) => {
+                    ar = arr;
+                    i = index;
+                });
+                if (dropPosition === -1) {
+                    ar.splice(i, 0, dragObj);
+                } else {
+                    ar.splice(i + 1, 0, dragObj);
+                }
+            }
+            setTreeData(data);
+        }
+    }
+    return <Tree defaultExpandAll draggable treeData={treeData} onDrop={onDrop} />;
 };
 
 export default App;
