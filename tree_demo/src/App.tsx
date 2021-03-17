@@ -24,6 +24,52 @@ const tree_data = [
                 title: '[サンプル]評価履歴',
                 key: 'SAMPLE_SHEET_DEFINITION_ANNUAL_REVIEW',
             },
+            {
+                title: '[サンプル]住所・連絡先1',
+                key: 'SAMPLE_SHEET_DEFINITION_CONTACT_ADDRESS1',
+            },
+            {
+                title: '[サンプル]評価履歴1',
+                key: 'SAMPLE_SHEET_DEFINITION_ANNUAL_REVIEW1',
+            },
+            {
+                title: '[サンプル]住所・連絡先2',
+                key: 'SAMPLE_SHEET_DEFINITION_CONTACT_ADDRESS2',
+            },
+            {
+                title: '[サンプル]評価履歴2',
+                key: 'SAMPLE_SHEET_DEFINITION_ANNUAL_REVIEW2',
+            },
+        ],
+    },
+    {
+        title: 'test個人情報',
+        key: 'testSAMPLE_SHEET_CATEGORY_PERSONAL_INFO',
+        children: [
+            {
+                title: 'test[サンプル]住所・連絡先',
+                key: 'testSAMPLE_SHEET_DEFINITION_CONTACT_ADDRESS',
+            },
+            {
+                title: 'test[サンプル]評価履歴',
+                key: 'testSAMPLE_SHEET_DEFINITION_ANNUAL_REVIEW',
+            },
+            {
+                title: 'test[サンプル]住所・連絡先1',
+                key: 'testSAMPLE_SHEET_DEFINITION_CONTACT_ADDRESS1',
+            },
+            {
+                title: 'test[サンプル]評価履歴1',
+                key: 'testSAMPLE_SHEET_DEFINITION_ANNUAL_REVIEW1',
+            },
+            {
+                title: 'test[サンプル]住所・連絡先2',
+                key: 'testSAMPLE_SHEET_DEFINITION_CONTACT_ADDRESS2',
+            },
+            {
+                title: 'test[サンプル]評価履歴2',
+                key: 'testSAMPLE_SHEET_DEFINITION_ANNUAL_REVIEW2',
+            },
         ],
     },
     {
@@ -37,6 +83,52 @@ const tree_data = [
             {
                 title: '[サンプル]資格管理',
                 key: 'SAMPLE_SHEET_DEFINITION_CERTIFICATION',
+            },
+            {
+                title: '[サンプル]学歴1',
+                key: 'SAMPLE_SHEET_DEFINITION_EDUCATION_BACKGROUND1',
+            },
+            {
+                title: '[サンプル]資格管理1',
+                key: 'SAMPLE_SHEET_DEFINITION_CERTIFICATION1',
+            },
+            {
+                title: '[サンプル]学歴2',
+                key: 'SAMPLE_SHEET_DEFINITION_EDUCATION_BACKGROUND2',
+            },
+            {
+                title: '[サンプル]資格管理2',
+                key: 'SAMPLE_SHEET_DEFINITION_CERTIFICATION2',
+            },
+        ],
+    },
+    {
+        title: 'test資格情報',
+        key: 'testSAMPLE_SHEET_CATEGORY_QUALIFICATIONS',
+        children: [
+            {
+                title: 'test[サンプル]学歴',
+                key: 'testSAMPLE_SHEET_DEFINITION_EDUCATION_BACKGROUND',
+            },
+            {
+                title: 'test[サンプル]資格管理',
+                key: 'testSAMPLE_SHEET_DEFINITION_CERTIFICATION',
+            },
+            {
+                title: 'test[サンプル]学歴1',
+                key: 'testSAMPLE_SHEET_DEFINITION_EDUCATION_BACKGROUND1',
+            },
+            {
+                title: 'test[サンプル]資格管理1',
+                key: 'testSAMPLE_SHEET_DEFINITION_CERTIFICATION1',
+            },
+            {
+                title: 'test[サンプル]学歴2',
+                key: 'testSAMPLE_SHEET_DEFINITION_EDUCATION_BACKGROUND2',
+            },
+            {
+                title: 'test[サンプル]資格管理2',
+                key: 'testSAMPLE_SHEET_DEFINITION_CERTIFICATION2',
             },
         ],
     },
