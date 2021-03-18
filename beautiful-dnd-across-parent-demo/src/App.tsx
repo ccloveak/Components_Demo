@@ -1,17 +1,20 @@
 import React, { FC, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ServiceCommandUnit from './ServiceCommandUnit';
-import { static_items } from './data1';
+import { static_items } from './data';
 
 export interface Child {
-    id: number;
-    content: string;
+    id: string;
+    name: string;
+    sort: string;
+    parentId: string;
 }
 
 interface Father {
-    id: number;
-    content: string;
-    subItems: Child[];
+    id: string;
+    name: string;
+    sort: string;
+    sheetDefinitions: Child[];
 }
 
 const reorderFather = (list: Father[], startIndex: number, endIndex: number) => {
@@ -60,13 +63,13 @@ const App: FC = () => {
             setDataItems(items);
         } else if (result.type === 'droppableSubItem') {
             const itemSubItemMap = dataItems.reduce((acc: any, item) => {
-                acc[item.id] = item.subItems;
+                acc[item.id] = item.sheetDefinitions;
                 //console.log('item 67:  ' + JSON.stringify(item));
                 return acc;
             }, {});
 
-            const sourceParentId = parseInt(result.source.droppableId);
-            const destParentId = parseInt(result.destination.droppableId);
+            const sourceParentId = String(result.source.droppableId);
+            const destParentId = String(result.destination.droppableId);
             console.log('sourceParentId' + sourceParentId);
             console.log('itemSubItemMap' + JSON.stringify(itemSubItemMap));
             const sourceSubItems = itemSubItemMap[sourceParentId];
@@ -83,7 +86,7 @@ const App: FC = () => {
                 );
                 newItems = newItems.map((item) => {
                     if (item.id === sourceParentId) {
-                        item.subItems = reorderedSubItems;
+                        item.sheetDefinitions = reorderedSubItems;
                     }
                     return item;
                 });
@@ -96,9 +99,9 @@ const App: FC = () => {
                 newDestSubItems.splice(destIndex, 0, draggedItem);
                 newItems = newItems.map((item) => {
                     if (item.id === sourceParentId) {
-                        item.subItems = newSourceSubItems;
+                        item.sheetDefinitions = newSourceSubItems;
                     } else if (item.id === destParentId) {
-                        item.subItems = newDestSubItems;
+                        item.sheetDefinitions = newDestSubItems;
                     }
                     return item;
                 });
@@ -127,7 +130,7 @@ const App: FC = () => {
                                                 provided.draggableProps.style,
                                             )}
                                         >
-                                            {item.content}
+                                            {item.name}
                                             <span
                                                 {...provided.dragHandleProps}
                                                 style={{
@@ -139,7 +142,7 @@ const App: FC = () => {
                                                 Drag
                                             </span>
                                             <ServiceCommandUnit
-                                                subItems={item.subItems}
+                                                subItems={item.sheetDefinitions}
                                                 type={item.id}
                                             />
                                         </div>

@@ -27,7 +27,7 @@ const getListStyle = (isDraggingOver: boolean) => ({
 
 interface ChildProps {
     subItems: Child[];
-    type: number;
+    type: string;
 }
 
 const ServiceCommandUnit: FC<ChildProps> = (props) => {
@@ -50,7 +50,7 @@ const ServiceCommandUnit: FC<ChildProps> = (props) => {
                                             provided.draggableProps.style,
                                         )}
                                     >
-                                        {item.content}
+                                        {item.name}
                                         <span
                                             {...provided.dragHandleProps}
                                             style={{
