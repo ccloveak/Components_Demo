@@ -49,3 +49,6 @@
 
 5. [iconfont演示](./react_icon)
   - 使用感受跟使用antd icon一毛一样
+
+6. [tailwind演示](./antd_tailwind)
+  - react项目导入antd,tailwind
